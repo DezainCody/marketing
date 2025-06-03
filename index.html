@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbita Digital - Conteúdo que conecta. Performance que converte.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0F172A;
+            --primary-blue: #3B82F6;
+            --primary-green: #10B981;
+            --text-light: #E5E7EB;
+            --text-dark: #1E293B;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-light);
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, var(--primary-blue) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.6;
+        }
+
+        /* Particles Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 0 120px;
+            gap: 80px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 80px 24px;
+                gap: 40px;
+                text-align: center;
+            }
+        }
+
+        .hero-content h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(32px, 5vw, 64px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-green));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .typing-text {
+            display: inline-block;
+            position: relative;
+        }
+
+        .typing-text::after {
+            content: '|';
+            color: var(--primary-blue);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        .cta-neon {
+            position: relative;
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            padding: 16px 48px;
+            border-radius: 50px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-neon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-neon:hover::before {
+            left: 100%;
+        }
+
+        .cta-neon:hover {
+            color: white;
+            background: var(--primary-blue);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .analytics-mockup {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            animation: float-complex 4s ease-in-out infinite;
+        }
+
+        @keyframes float-complex {
+            0%, 100% { transform: translateY(0px) rotateY(0deg); }
+            25% { transform: translateY(-10px) rotateY(2deg); }
+            75% { transform: translateY(10px) rotateY(-2deg); }
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary-blue);
+        }
+
+        .metric-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
+            border-radius: 3px;
+            animation: progress-grow 3s ease-in-out infinite;
+        }
+
+        @keyframes progress-grow {
+            0% { width: 0%; }
+            50% { width: 85%; }
+            100% { width: 0%; }
+        }
+
+        /* Diferenciais Section */
+        .diferenciais {
+            padding: 120px 0;
+            position: relative;
+            z-index: 2;
+            background: var(--primary-dark);
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 80px;
+            background: linear-gradient(45deg, var(--text-light), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cards-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            gap: 40px;
+        }
+
+        .card-diferencial {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+        }
+
+        .card-diferencial:nth-child(even) {
+            clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+        }
+
+        .card-diferencial:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .card-diferencial::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transition: left 0.8s;
+        }
+
+        .card-diferencial:hover::before {
+            left: 100%;
+        }
+
+        .icon-custom {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .card-diferencial h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-light);
+        }
+
+        .card-diferencial p {
+            color: #94A3B8;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Custom SVG Icons */
+        .brain-pen-icon {
+            animation: draw-brain 2s ease-in-out infinite;
+        }
+
+        @keyframes draw-brain {
+            0%, 100% { stroke-dashoffset: 0; }
+            50% { stroke-dashoffset: 20; }
+        }
+
+        .gps-route-icon {
+            animation: pulse-route 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-route {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .heart-social-icon {
+            animation: heart-beat 2s ease-in-out infinite;
+        }
+
+        @keyframes heart-beat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            75% { transform: scale(0.95); }
+        }
+
+        .hand-message-icon {
+            animation: wave-hand 3s ease-in-out infinite;
+        }
+
+        @keyframes wave-hand {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        /* Prova Section */
+        .prova {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            position: relative;
+            z-index: 2;
+        }
+
+        .prova-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .prova-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .testimonial-story {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            animation: float-story 6s ease-in-out infinite;
+        }
+
+        .testimonial-story:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .testimonial-story:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        @keyframes float-story {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .story-quote {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .story-author {
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+
+        /* Conteúdo Section */
+        .conteudo {
+            padding: 120px 40px;
+            background: var(--primary-dark);
+            position: relative;
+            z-index: 2;
+        }
+
+        .zigzag-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+            align-items: center;
+        }
+
+        .content-card:nth-child(even) {
+            direction: rtl;
+        }
+
+        .content-card:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        @media (max-width: 768px) {
+            .content-card {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .content-card:nth-child(even) {
+                direction: ltr;
+            }
+        }
+
+        .content-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-text h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--text-light), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-text p {
+            color: #94A3B8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .learn-more {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .learn-more::after {
+            content: '→';
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .learn-more:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* Conversão Section */
+        .conversao {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .conversao::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 60px auto 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            color: var(--text-light);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .form-input::placeholder {
+            color: #64748B;
+        }
+
+        .rocket-button {
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-green));
+            border: none;
+            color: white;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .rocket-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .rocket-icon {
+            display: inline-block;
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .rocket-button:hover .rocket-icon {
+            animation: rocket-launch 0.6s ease-out;
+        }
+
+        @keyframes rocket-launch {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(15deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            
+            .cursor, .cursor-trail {
+                display: none;
+            }
+            
+            .hero {
+                min-height: auto;
+            }
+            
+            .cards-container {
+                padding: 0 20px;
+            }
+            
+            .prova, .conteudo, .conversao {
+                padding: 80px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>
+                Geramos <span class="highlight typing-text">conteúdo</span><br>
+                que <span class="highlight">conecta e converte</span>
+            </h1>
+            <p class="hero-subtitle">Conteúdo que conecta. Performance que converte.</p>
+            <a href="#conversao" class="cta-neon">Quero resultados reais</a>
+        </div>
+        <div class="hero-visual">
+            <div class="analytics-mockup">
+                <div class="metric-item">
+                    <span>ROI Médio</span>
+                    <span class="metric-value">347%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="metric-item">
+                    <span>Engajamento</span>
+                    <span class="metric-value">+89%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="animation-delay: 1s;"></div>
+                </div>
+                <div class="metric-item">
+                    <span>Conversões</span>
+                    <span class="metric-value">+156%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="animation-delay: 2s;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diferenciais Section -->
+    <section class="diferenciais">
+        <h2 class="section-title">Por que somos únicos</h2>
+        <div class="cards-container">
+            <div class="card-diferencial">
+                <div class="icon-custom">
+                    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="brain-pen-icon">
+                        <path d="M20 40C20 28 28 20 40 20C52 20 60 28 60 40C60 45 58 50 55 54" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" stroke-dasharray="5,5"/>
+                        <path d="M25 35C25 30 30 25 35 25" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M45 25C50 25 55 30 55 35" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M35 45L45 35L50 60" stroke="#F97316" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="50" cy="60" r="3" fill="#F97316"/>
+                    </svg>
+                </div>
+                <h3>Conteúdo com inteligência criativa</h3>
+                <p>Cada peça de conteúdo é estrategicamente pensada para educar, engajar e converter, combinando dados comportamentais com criatividade autêntica.</p>
+            </div>
+
+            <div class="card-diferencial">
+                <div class="icon-custom">
+                    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="gps-route-icon">
+                        <path d="M15 20L35 30L50 15L65 35L75 25" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="15" cy="20" r="4" fill="#10B981"/>
+                        <circle cx="35" cy="30" r="3" fill="#F97316"/>
+                        <circle cx="50" cy="15" r="3" fill="#F97316"/>
+                        <circle cx="65" cy="35" r="3" fill="#F97316"/>
+                        <circle cx="75" cy="25" r="4" fill="#10B981"/>
+                        <path d="M20 50L40 45L60 55" stroke="#10B981" stroke-width="2" stroke-dasharray="3,3"/>
+                    </svg>
+                </div>
+                <h3>Tráfego orientado por dados</h3>
+                <p>Campanhas de Meta Ads e Google Ads otimizadas com machine learning e análise preditiva para maximizar cada centavo investido.</p>
+            </div>
+
+            <div class="card-diferencial">
+                <div class="icon-custom">
+                    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="heart-social-icon">
+                        <path d="M40 65C40 65 15 50 15 30C15 22 22 15 30 15C35 15 40 20 40 20C40 20 45 15 50 15C58 15 65 22 65 30C65 50 40 65 40 65Z" fill="none" stroke="#F97316" stroke-width="3"/>
+                        <path d="M25 40L35 45L55 40" stroke="#3B82F6" stroke-width="2"/>
+                        <circle cx="30" cy="35" r="2" fill="#10B981"/>
+                        <circle cx="50" cy="35" r="2" fill="#10B981"/>
+                    </svg>
+                </div>
+                <h3>Redes sociais com alma</h3>
+                <p>Gestão humanizada que cria conexões reais entre sua marca e audiência, gerando comunidades engajadas e fiéis.</p>
+            </div>
+
+            <div class="card-diferencial">
+                <div class="icon-custom">
+                    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="hand-message-icon">
+                        <path d="M20 40C20 35 25 30 30 30L35 30L35 25C35 20 40 15 45 15C50 15 55 20 55 25L55 30L60 30C65 30 70 35 70 40L70 60C70 65 65 70 60 70L30 70C25 70 20 65 20 60L20 40Z" fill="none" stroke="#3B82F6" stroke-width="3"/>
+                        <circle cx="45" cy="45" r="8" fill="none" stroke="#10B981" stroke-width="2"/>
+                        <path d="M42 45L44 47L48 43" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>Suporte humano de verdade</h3>
+                <p>Comunicação direta e transparente com profissionais especializados, sem chatbots ou respostas automáticas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prova Section -->
+    <section class="prova">
+        <h2 class="section-title">Resultados que falam por si</h2>
+        <div class="prova-container">
+            <div class="testimonial-story">
+                <p class="story-quote">"Em 4 meses, nosso e-commerce saiu de R$ 50k para R$ 200k mensais. A estratégia de conteúdo + tráfego pago da Orbita foi transformadora."</p>
+                <p class="story-author">— Marina Santos, CEO Loja Digital</p>
+            </div>
+            <div class="testimonial-story">
+                <p class="story-quote">"Finalmente uma agência que entende nosso negócio B2B. Aumentamos 300% os leads qualificados em 6 meses."</p>
+                <p class="story-author">— Carlos Eduardo, Diretor Comercial</p>
+            </div>
+            <div class="testimonial-story">
+                <p class="story-quote">"O engajamento no Instagram cresceu 450% e as vendas diretas pelas redes sociais triplicaram. Resultado impressionante!"</p>
+                <p class="story-author">— Julia Costa, Fundadora Beauty Brand</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conteúdo Section -->
+    <section class="conteudo">
+        <h2 class="section-title">Insights que geram resultado</h2>
+        <div class="zigzag-container">
+            <div class="content-card">
+                <div class="content-text">
+                    <h3>5 estratégias para dobrar seu ROAS</h3>
+                    <p>Descubra as técnicas avançadas que utilizamos para otimizar campanhas de tráfego pago e maximizar o retorno sobre investimento publicitário.</p>
+                    <a href="#" class="learn-more">Ler artigo completo</a>
+                </div>
+                <div class="content-visual">
+                    <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 80%; height: 80%;">
+                        <rect x="20" y="120" width="30" height="20" fill="#3B82F6" rx="2"/>
+                        <rect x="60" y="100" width="30" height="40" fill="#10B981" rx="2"/>
+                        <rect x="100" y="80" width="30" height="60" fill="#F97316" rx="2"/>
+                        <rect x="140" y="60" width="30" height="80" fill="#3B82F6" rx="2"/>
+                        <path d="M35 120L75 100L115 80L155 60" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="35" cy="120" r="4" fill="#10B981"/>
+                        <circle cx="75" cy="100" r="4" fill="#10B981"/>
+                        <circle cx="115" cy="80" r="4" fill="#10B981"/>
+                        <circle cx="155" cy="60" r="4" fill="#10B981"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="content-text">
+                    <h3>Melhor horário para postar no Instagram</h3>
+                    <p>Análise completa dos horários de pico de engajamento baseada em dados reais de mais de 500 contas gerenciadas.</p>
+                    <a href="#" class="learn-more">Ver pesquisa</a>
+                </div>
+                <div class="content-visual">
+                    <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 80%; height: 80%;">
+                        <circle cx="100" cy="75" r="60" fill="none" stroke="#3B82F6" stroke-width="3"/>
+                        <path d="M100 75L100 35" stroke="#F97316" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M100 75L130 85" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="100" cy="75" r="5" fill="#3B82F6"/>
+                        <text x="100" y="20" text-anchor="middle" fill="#E5E7EB" font-size="12">12</text>
+                        <text x="145" y="80" text-anchor="middle" fill="#E5E7EB" font-size="12">3</text>
+                        <text x="100" y="140" text-anchor="middle" fill="#E5E7EB" font-size="12">6</text>
+                        <text x="55" y="80" text-anchor="middle" fill="#E5E7EB" font-size="12">9</text>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="content-text">
+                    <h3>Como criar funis de conversão que vendem</h3>
+                    <p>Metodologia step-by-step para construir funis de vendas que convertem até 12x mais que a média do mercado.</p>
+                    <a href="#" class="learn-more">Baixar guia</a>
+                </div>
+                <div class="content-visual">
+                    <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 80%; height: 80%;">
+                        <path d="M50 30L150 30L130 60L110 90L90 120L70 90L50 60Z" fill="none" stroke="#3B82F6" stroke-width="3"/>
+                        <circle cx="100" cy="30" r="5" fill="#10B981"/>
+                        <circle cx="120" cy="60" r="4" fill="#F97316"/>
+                        <circle cx="100" cy="90" r="3" fill="#10B981"/>
+                        <circle cx="80" cy="120" r="6" fill="#3B82F6"/>
+                        <path d="M80 130L85 135L90 125" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conversão Section -->
+    <section class="conversao" id="conversao">
+        <h2 class="section-title">Pronto para escalar sua presença digital?</h2>
+        <p style="font-size: 20px; opacity: 0.8; margin-bottom: 0;">Vamos conversar sobre como transformar seu negócio</p>
+        
+        <div class="form-container">
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Seu nome completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-input" placeholder="Seu melhor e-mail" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Sua empresa" required>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-input" rows="4" placeholder="Conte-nos sobre seu principal desafio de marketing digital" required></textarea>
+                </div>
+                <button type="submit" class="rocket-button">
+                    Quero uma análise gratuita
+                    <span class="rocket-icon">🚀</span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const trails = [];
+        
+        // Create cursor trails
+        for (let i = 0; i < 8; i++) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            document.body.appendChild(trail);
+            trails.push(trail);
+        }
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursor.style.left = mouseX - 10 + 'px';
+            cursor.style.top = mouseY - 10 + 'px';
+            
+            // Animate trails
+            trails.forEach((trail, index) => {
+                setTimeout(() => {
+                    trail.style.left = mouseX - 2 + 'px';
+                    trail.style.top = mouseY - 2 + 'px';
+                }, index * 20);
+            });
+        });
+
+        // Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 20 : 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (4 + Math.random() * 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Typing animation
+        const typingText = document.querySelector('.typing-text');
+        const words = ['conteúdo', 'campanhas', 'estratégias'];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeWriter() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 100 : 150;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+
+        typeWriter();
+
+        // Smooth scrolling
+        document.querySelector('.cta-neon').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('#conversao').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Animate rocket
+            const rocket = document.querySelector('.rocket-icon');
+            rocket.style.animation = 'rocket-launch 0.6s ease-out';
+            
+            setTimeout(() => {
+                alert('🚀 Mensagem enviada! Nossa equipe entrará em contato em até 24h para agendar sua análise gratuita.');
+                rocket.style.animation = '';
+            }, 600);
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.card-diferencial, .testimonial-story, .content-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'all 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Interactive hover effects
+        document.querySelectorAll('.card-diferencial, .cta-neon, .rocket-button').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+            });
+        });
+
+        // Subtle parallax effect for hero background only
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (scrolled < window.innerHeight) {
+                const speed = scrolled * 0.3;
+                hero.style.backgroundPosition = `center ${speed}px`;
+            }
+        });
+
+        // Background color change on scroll
+        window.addEventListener('scroll', () => {
+            const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+            const hue = 220 + (scrollPercentage * 40); // From blue to purple
+            document.body.style.background = `linear-gradient(135deg, hsl(${hue}, 40%, 8%) 0%, hsl(${hue + 20}, 35%, 12%) 100%)`;
+        });
+    </script>
+</body>
+</html>
